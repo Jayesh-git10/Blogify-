@@ -13,8 +13,10 @@ await connectDB()
 
 //Middleware
 app.use(cors({
-  origin: "http://localhost:5173",   // your React frontend URL
-  credentials: true                 // allow cookies
+  origin: function (origin, callback) {
+    callback(null, origin || "*");  // allow all origins
+  },
+  credentials: true
 }));
 app.use(express.json())
 
